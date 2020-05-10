@@ -26,39 +26,34 @@ import javafx.scene.control.TableColumn;
 
 public class SearchResultController implements Initializable {
 	
-	
-	
 SearchResultModel searchMod = new SearchResultModel();
-
-//public String text;
 
 public String ponkas = "kakboken";
 
 private String titles;
+private String authors;
+private String countries;
+private String subjects;
 
-public SearchResultController(String titles) {
+
+public SearchResultController(String titles, String authors, String countries, String subjects) {
 	this.titles = titles;
+	this.authors = authors;
+	this.countries = countries;
+	this.subjects = subjects;
 }
-
-
-
-//public String titleText = "Tågboken";
-
-
-
-//String tåg = "Tågboken";
-
-//SearchBookController sBC = new SearchBookController();
-	
-//	@FXML
-//	private SearchBookController sBC;
-	
-//	public String titleTex = sBC.searchTitText;
-//	
-//	String titleInput = sBC.getSearchTitleTxt();
 
 	@FXML
 	private Text titleText;
+	
+	@FXML
+	private Text authorText;
+	
+	@FXML
+	private Text countryText;
+	
+	@FXML
+	private Text subjectText;
 
 	@FXML
 	private TableView<Book> table;
@@ -71,35 +66,25 @@ public SearchResultController(String titles) {
 	@FXML
 	private TableColumn<Book, String> columnSubject;
 	
-//	private String getTitleText() {
-//		titleText = sBC.getTitleTextField();
-//		return titleText;
-//	}
-
-//	public String titleInput() {
-//		titleInput = sBC.getSearchTitleTxt().getText();
-//		return titleInput;
-//	}
-	
-	
 	public void myFunction(String titel) {
 		
-
 	}
+	
+	
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		titleText.setText(titles);
+		authorText.setText(authors);
+		countryText.setText(countries);
+		subjectText.setText(subjects);
 		columnTitle.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
 		columnAuthor.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
 		columnCountry.setCellValueFactory(new PropertyValueFactory<Book, String>("country"));
 		columnSubject.setCellValueFactory(new PropertyValueFactory<Book, String>("subject"));
-
-		System.out.println();
-		searchMod.getBooks(titleText.getText());
+		searchMod.getBooks(titleText.getText(), authorText.getText(), countryText.getText(), subjectText.getText());
+//		searchMod.getAuthors(authorText.getText());
 		table.setItems(searchMod.printBooks());
 	}
 	
-
-
 }
